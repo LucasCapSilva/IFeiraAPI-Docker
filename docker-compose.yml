@@ -27,7 +27,7 @@ services:
       - ./IFeiraAPI:/IFeiraAPI
       - ~/.m2:/root/.m2
     ports:
-      - "8080:8080"
+      - "9000:8080"
     command: mvn clean spring-boot:run
     links:
       - db
@@ -35,6 +35,12 @@ services:
       - db
     networks:
       - udemy-network
+  frontend:
+    image: nginx
+    volumes:
+      - ./frontend:/usr/share/nginx/html/
+    ports:
+      - "4200:80"
 networks:
     udemy-network:
         driver: bridge
